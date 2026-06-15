@@ -4,7 +4,6 @@
 import mongoose from "mongoose";
 
 const mongoURI = process.env.MONGODB_URI;
-console.log("Mongo URI:", mongoURI);
 
 if (!mongoURI) {
     throw new Error(
