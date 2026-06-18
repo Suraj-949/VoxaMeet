@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import Header from "./components/Header";
+import MeetingFeature from "./components/MeetingFeature";
 
 
 export default function Home() {
@@ -42,12 +43,12 @@ export default function Home() {
               <p className="text-3xl text-gray-600 dark:text-gray-300 mb-12">
                 Connect with your team anytime, anywhere. Join or start meetings with Google Meet.
               </p>
-              
+
               Meeting Action
             </div>
 
             <div className="md:w-1/2 flex justify-center">
-              Meeting feature
+              <MeetingFeature />
             </div>
           </div>
 
