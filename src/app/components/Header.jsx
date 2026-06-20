@@ -2,7 +2,7 @@
 
 import { useTheme } from 'next-themes';
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Info, LogOut, Moon, Plus, Sun, Video, X } from "lucide-react";
 import { Button } from '../../components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -13,6 +13,8 @@ const Header = () => {
     const { theme, setTheme } = useTheme();
     const { data: session, status } = useSession();
     const [open, setOpen] = useState(false);
+
+    const [currentTime, setCurrentTime] = useState("");
 
     const formatTimeDate = () => {
         const now = new Date();
@@ -25,6 +27,13 @@ const Header = () => {
             day: "numeric",
         });
     };
+
+    useEffect(() => {
+        const updateTime = () => setCurrentTime(formatTimeDate());
+        updateTime();
+        const interval = setInterval(updateTime, 60000);
+        return () => clearInterval(interval);
+    }, []);
 
     const userPlaceHolder = session?.user?.name?.split(" ").map((name) => name[0]).join("");
 
@@ -46,7 +55,7 @@ const Header = () => {
 
             <div className="flex items-center gap-4">
                 <span className="text-md text-gray-500 dark:text-gray-200">
-                    {formatTimeDate()}
+                    {currentTime}
                 </span>
 
                 <Button
@@ -79,7 +88,7 @@ const Header = () => {
                                 </AvatarFallback>
                             )}
                         </Avatar>
-                    </DropdownMenuTrigger> 
+                    </DropdownMenuTrigger>
 
                     <DropdownMenuContent align="end" className="w-80 p-4">
                         <div className="flex justify-between items-center mb-2">
@@ -128,7 +137,7 @@ const Header = () => {
                                 SignOut
                             </Button>
                         </div>
-                        
+
                         <div className="text-center text-sm text-gray-500 ">
                             <Link href="#" className="hover:bg-gray-300 p-2 rounded-lg">
                                 Privacy Policy

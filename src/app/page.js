@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import Header from "./components/Header";
 import MeetingFeature from "./components/MeetingFeature";
+import MeetingAction from "./components/MeetingAction";
 
 
 export default function Home() {
@@ -44,7 +45,7 @@ export default function Home() {
                 Connect with your team anytime, anywhere. Join or start meetings with Google Meet.
               </p>
 
-              Meeting Action
+              <MeetingAction/>
             </div>
 
             <div className="md:w-1/2 flex justify-center">
