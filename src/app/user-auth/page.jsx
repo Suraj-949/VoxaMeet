@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { signIn } from "next-auth/react"
 import { toast } from "react-toastify"
 import Loader from "../../app/components/Loader";
@@ -14,11 +14,15 @@ const page = () => {
     const [isLoading, setIsLoading] = useState(false);
     const url = process.env.NEXTAUTH_URL;
 
+    useEffect(() => {
+        localStorage.removeItem("hasShownWelcome");
+    }, []);
+
     const handleLogin = async (provider) => {
         setIsLoading(true);
 
         try {
-            await signIn(provider, {callbackUrl: url})
+            await signIn(provider, { callbackUrl: url })
             toast.info(`Logging with ${provider}`)
 
         }
@@ -53,7 +57,7 @@ const page = () => {
                     </p>
 
                     <div className="flex flex-col gap-4">
-                        <Button className="w-full dark:hover:bg-white dark:hover:text-black" variant='outline' onClick={()=>{handleLogin('google')}}>
+                        <Button className="w-full dark:hover:bg-white dark:hover:text-black" variant='outline' onClick={() => { handleLogin('google') }}>
                             <svg
                                 className="w-5 h-5 mr-2"
                                 viewBox="0 0 24 24"
@@ -76,7 +80,7 @@ const page = () => {
                             <div className="h-px flex-1 bg-stone-400" />
                         </div>
 
-                        <Button className="w-full bg-black text-white dark:hover:bg-gray-200 dark:bg-white dark:text-black" variant='outline' onClick={()=>{handleLogin('github')}}>
+                        <Button className="w-full bg-black text-white dark:hover:bg-gray-200 dark:bg-white dark:text-black" variant='outline' onClick={() => { handleLogin('github') }}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"

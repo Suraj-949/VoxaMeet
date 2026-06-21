@@ -16,7 +16,6 @@ export default function Home() {
   useEffect(() => {
     if (status === "authenticated") {
       setIsLoading(false);
-
       const hasShownWelcome = localStorage.getItem("hasShownWelcome");
 
       if (!hasShownWelcome) {
